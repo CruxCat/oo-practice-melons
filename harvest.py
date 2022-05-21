@@ -7,13 +7,19 @@ class MelonType:
     """A species of melon at a melon farm."""
 
     def __init__(
-        self, code, first_harvest, color, is_seedless, is_bestseller, name
+        self, first_harvest, code, color, is_seedless, is_bestseller, name
     ):
         """Initialize a melon."""
 
         self.pairings = []
+        self.name = name
+        self.first_harvest = first_harvest
+        self.code = code
+        self.color = color
+        self.is_seedless = is_seedless # may want to have as T/F
+        self.is_bestseller = is_bestseller # may want to have T/F
 
-        # Fill in the rest
+        
 
     def add_pairing(self, pairing):
         """Add a food pairing to the instance's pairings list."""
