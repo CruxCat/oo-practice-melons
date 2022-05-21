@@ -98,20 +98,69 @@ def make_melon_type_lookup(melon_types):
 ############
 
 
+    #Initialize function & ascribe following attributes - name, melon type, shape, color, the field it came from, & harvester
+    #Create a function to determine if item is sellable based on shape rating and color rating
+    #Return a list of melon objects
+
+
+
 class Melon:
     """A melon in a melon harvest."""
+    def __init__(self, melon_type, shape_rating, color_rating, field, harvester):
+        """Initialize a melon instance."""
 
-    # Fill in the rest
-    # Needs __init__ and is_sellable methods
+        self.melon_type = melon_type
+        self.shape_rating = shape_rating
+        self.color_rating = color_rating
+        self.field = field
+        self.harvester = harvester
 
 
-def make_melons(melon_types):
+    def is_sellable(self): # a melon is able to be sold if both its shape and color ratings are greater than 5, and it didn’t come from field 3, which was found to have poisonous fertilizer planted by a competing melon farm
+        """Determine whether this melon can be sold."""
+
+        if self.shape_rating > 5 and self.color_rating >5 and self.field != 3:
+            return True
+        else:
+            return False
+
+
+def make_melons(melon_types): #  Create a function called make_melons which instantiates the class Melon for each of the above melons. The function should return a list of objects of the class Melon.
     """Returns a list of Melon objects."""
+    melons_by_id = make_melon_type_lookup(melon_types)
 
-    # Fill in the rest
+    melon_1 = Melon(melons_by_id["yw"], 8, 7, 2, "Sheila")
+    melon_2 = Melon(melons_by_id["yw"], 3, 4, 2, "Sheila")
+    melon_3 = Melon(melons_by_id["yw"], 9, 8, 3, "Sheila")
+    melon_4 = Melon(melons_by_id["cas"], 10, 6, 35, "Sheila")
+    melon_5 = Melon(melons_by_id["cren"], 8, 9, 35, "Michael")
+    melon_6 = Melon(melons_by_id["cren"], 8, 2, 35, "Michael")
+    melon_7 = Melon(melons_by_id["cren"], 2, 3, 4, "Michael")
+    melon_8 = Melon(melons_by_id["musk"], 6, 7, 4, "Michael")
+    melon_9 = Melon(melons_by_id["yw"], 7, 10, 3, "Sheila")
 
+    melons = [
+        melon_1,
+        melon_2,
+        melon_3,
+        melon_4,
+        melon_5,
+        melon_6,
+        melon_7,
+        melon_8,
+        melon_9
+    ]
 
-def get_sellability_report(melons):
+    return melons
+    
+
+def get_sellability_report(melons): # Your last task is to write a function, get_sellability_report, which prints out information about each melon that was harvested, and whether or not it is sellable.
+
+# This function should take a list of melon instances as an argument, and return nothing. But, the function will print out who harvested each melon, what field it was harvested from, and whether it is sellable or not. In order to print this report, you’ll access several attributes, and call the is_sellable method on each melon instance.
     """Given a list of melon object, prints whether each one is sellable."""
 
-    # Fill in the rest
+    for melon in melons:
+        harvested_by = f"Harvested by {melon.harvester}"
+        field_num = f"Field #{melon.field}"
+        status = "CAN BE SOLD" if melon.is_sellable() else "NOT SELLABLE"
+        print(f"{harvested_by} from {field_num} {status}")
